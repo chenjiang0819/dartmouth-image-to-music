@@ -13,7 +13,7 @@ Project type: Individual final project
 Chen Jiang designed and implemented the image-processing and musical mapping experiment in MATLAB, including note/chord generation, gradient-based duration, entropy-based rhythm and waveform mixing.
 
 ## Original Implementation
-`historical/code.m` preserves the selected handwritten source byte-for-byte. Full original media, report and live script are retained privately. The public historical selection omits those files and is not the complete original project.
+`historical/code.m` preserves the selected handwritten source byte-for-byte. The supplied original audio, report and live script are retained privately; the historical photo and huge generated MAT file were not acquired or bundled. The public historical selection omits those files and is not the complete original project.
 
 ## Technical Approach
 The original major-scale frequency selection and FFT/gradient/entropy concept are retained. This is an artistic mapping, not a validated measure of personality or musical quality.
@@ -42,4 +42,4 @@ The maintained function is verified in Octave, not native MATLAB. The original s
 Original project: Chen Jiang. MATLAB/Octave image-processing libraries. No instructor assignment, photo, report or third-party recording is redistributed.
 
 ## Original Snapshot
-`archive/public-original-sanitized` contains a selected historical snapshot, NOT a byte-identical copy of the full project. Exact full source hashes and local Git originals remain private. Maintenance is on `ai/project-hardening` and explicitly dated 2026.
+`archive/public-original-sanitized` contains a selected historical snapshot, NOT a byte-identical copy of the full project. Exact acquired-source hashes and local Git originals remain private. Maintenance is on `ai/project-hardening` and explicitly dated 2026.
