@@ -1,45 +1,42 @@
 # Image to Music
 
-## Overview
-An artistic image-to-music experiment: grayscale → median/Gaussian filtering → FFT, gradient and entropy → notes/chords/rhythm → synthesized audio.
+An artistic MATLAB experiment that turns image structure into notes, chords and
+rhythm. Chen Jiang designed and implemented this individual Dartmouth ENGS111
+Digital Image Processing final project in 2023.
 
-## Academic Context
-University: Dartmouth College, Thayer School of Engineering  
-Course: ENGS111 Digital Image Processing  
-Year: 2023 (project report dated May 28)  
-Project type: Individual final project
+## Approach
 
-## My Contribution
-Chen Jiang designed and implemented the image-processing and musical mapping experiment in MATLAB, including note/chord generation, gradient-based duration, entropy-based rhythm and waveform mixing.
+Grayscale conversion and median/Gaussian filtering feed FFT, gradient and entropy
+measurements. These determine major-scale frequencies, chord selection, note
+duration and rhythm before waveform mixing. The original musical mapping remains
+in the maintained `image_to_music` function.
 
-## Original Implementation
-`historical/code.m` preserves the selected handwritten source byte-for-byte. The supplied original audio, report and live script are retained privately; the historical photo and huge generated MAT file were not acquired or bundled. The public historical selection omits those files and is not the complete original project.
+## Run
 
-## Technical Approach
-The original major-scale frequency selection and FFT/gradient/entropy concept are retained. This is an artistic mapping, not a validated measure of personality or musical quality.
-
-## Build / Run
-MATLAB with Image Processing Toolbox, or Octave 7 with its image package. In Octave first run `pkg load image`.
+Use MATLAB with Image Processing Toolbox, or Octave 7 with the image package.
+In Octave, first run `pkg load image`.
 
 ```matlab
-img = reshape(linspace(0,1,256),16,16); % original synthetic fixture
+img = reshape(linspace(0,1,256),16,16);
 [audio, Fs, info] = image_to_music(img,8000,4);
 audiowrite('example.wav',audio,Fs);
 ```
 
-Default preview grid is 16×16; the historical 50×50 grid remains configurable; use a smaller grid for shorter output. Sample rate must be 2000–192000 Hz. A 30-million-sample cap bounds allocation. Playback is opt-in via `soundsc(audio,Fs)`.
+The default preview grid is 16×16; the original 50×50 grid is configurable.
+Sample rates range from 2000 to 192000 Hz, with a 30-million-sample allocation
+cap. Playback is optional through `soundsc(audio,Fs)`.
 
-## Verification / Testing
-Run `test_image_to_music`. Octave 7.3 with image 2.14 passed note/chord oracles, sample-count checks, finite audio, integer/float/RGB/grayscale input, invalid input and WAV output. Synthetic sample generation is tested; original MATLAB GUI/playback and spectrogram were NOT VERIFIED.
+## Checks and examples
 
-## 2026 AI-Assisted Maintenance
-Corrected zero-based modulo mapping and chord offsets, guarded constant-gradient/zero-entropy/zero-peak cases, scaled integer images by type range, accepted grayscale input, bounded sample allocation and replaced repeated concatenation with preallocation. Playback, figure creation and filesystem reads are outside the maintained pure function. The Gaussian kernel is explicit for MATLAB/Octave portability. Small-image filtering was repaired after an actual Octave regression failure.
+Run `test_image_to_music`. Octave 7.3 checks passed note/chord and duration
+oracles, finite audio, integer/float and RGB/grayscale inputs, invalid inputs
+and WAV output. A constant 2×2 input at 8 kHz produces 11,200 samples for four
+0.35-second notes. [Examples](examples) include generated image/audio output.
 
-## Known Limitations
-The maintained function is verified in Octave, not native MATLAB. The original script needs the omitted input photo and interactive MATLAB functions; its Octave baseline stopped in headless plotting. Synthetic images/audio replace historical media. No subjective musical-quality evaluation is claimed.
+## 2026 maintenance
 
-## Attribution
-Original project: Chen Jiang. MATLAB/Octave image-processing libraries. No instructor assignment, photo, report or third-party recording is redistributed.
-
-## Original Snapshot
-`archive/public-original-sanitized` contains a selected historical snapshot, NOT a byte-identical copy of the full project. Exact acquired-source hashes and local Git originals remain private. Maintenance is on `ai/project-hardening` and explicitly dated 2026.
+AI-assisted maintenance corrected note/chord indexing and zero-gradient/entropy
+cases, handled image type ranges, bounded allocation and preallocated audio.
+The pure function keeps playback, plotting and file reads separate. Selected
+handwritten source remains in [historical/code.m](historical/code.m); running
+that original script requires its image input and interactive MATLAB functions.
